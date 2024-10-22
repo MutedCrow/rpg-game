@@ -57,4 +57,13 @@ func returnedDirection(direction: Vector2):
 func _input(event):
 	if event.is_action_pressed("shoot"):
 		is_attacking = true
-		animation = "attack_" + returnedDirection(direction)
+		animation = "attack_" + returnedDirection(new_direction)
+		animated_sprite.play(animation)
+		
+
+
+
+
+func _on_animated_sprite_2d_animation_finished():
+	print("finsih attacking")
+	is_attacking = false
