@@ -47,7 +47,7 @@ func returnedDirection(direction: Vector2):
 	elif normalized_direction.x > 0:
 		animated_sprite.flip_h = false
 		return "side"
-	elif normalized_direction.x < 0:
+	elif normalized_direction.x < 0 and normalized_direction.y == 0:
 		animated_sprite.flip_h = true
 		return "side"
 		
@@ -65,5 +65,5 @@ func _input(event):
 
 
 func _on_animated_sprite_2d_animation_finished():
-	print("finsih attacking")
+	print("finish attacking")
 	is_attacking = false
