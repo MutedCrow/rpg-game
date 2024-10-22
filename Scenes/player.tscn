@@ -492,7 +492,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"attack_down",
-"speed": 8.0
+"speed": 12.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -515,7 +515,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"attack_downangle",
-"speed": 8.0
+"speed": 12.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -538,7 +538,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"attack_side",
-"speed": 8.0
+"speed": 12.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -561,7 +561,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"attack_up",
-"speed": 8.0
+"speed": 12.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -584,7 +584,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"attack_upangle",
-"speed": 8.0
+"speed": 12.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -912,6 +912,6 @@ shape = SubResource("CapsuleShape2D_mbihk")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_c4pyd")
-animation = &"attack_up"
+animation = &"attack_down"
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
