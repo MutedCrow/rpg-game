@@ -1,15 +1,18 @@
 extends CharacterBody2D
 
 
-@export var speed = 30.0
-var direction: Vector2
+@export var speed = 90.0
+var direction: Vector2 = Vector2.ZERO
 var new_direction = Vector2(0, 1)
 
 var rng = RandomNumberGenerator.new()
 
 var timer = 0
 
-var player = get_tree().root.get_node("main/player")
+@onready var player = $"../Player"
+var animation
+@onready var animated_sprite = $AnimatedSprite2D
+var is_attacking = false
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 
@@ -18,8 +21,19 @@ func _ready() -> void:
 
 
 func _physics_process(delta):
+	print(direction)
 	var movement = speed * direction * delta
 	var collision = move_and_collide(movement)
+	
+	if collision != null and collision.get_collider().name != "player":
+		direction = direction.rotated(rng.randf_range(PI/4, PI/2))
+		timer = rng.randf_range(2, 5)
+	else:
+		timer = 0
+		
+	if !is_attacking:
+		pass
+		#enemyDirection(direction)
 
 
 
@@ -38,3 +52,32 @@ func _on_timer_timeout():
 			direction = Vector2.ZERO
 		elif random_direction < 0.1:
 			direction = Vector2.DOWN.rotated(rng.randf() * 2 * PI)
+			
+			
+	
+	
+func enemyDirection(direction: Vector2):
+	if direction != Vector2.ZERO:
+		new_direction = direction
+		#animation = "walk_" + GSreturnedDirection(new_direction)
+		animated_sprite.play(animation)
+	else:
+		#animation = "idle_" + GSreturnedDirection(direction)
+		animated_sprite.play(animation)
+
+
+
+func GSreturnedDirection(direction: Vector2):
+	var normalized_direction = direction.normalized()
+	var default_return = "down"
+	
+	if normalized_direction.y > 0:
+		return "down"
+	elif normalized_direction.y < 0:
+		return "up"
+	elif normalized_direction.x > 0:
+		animated_sprite.flip_h = false
+		return "side"
+	elif normalized_direction.x < 0 and normalized_direction.y == 0:
+		animated_sprite.flip_h = true
+		return "side"

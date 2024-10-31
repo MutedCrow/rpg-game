@@ -5,8 +5,11 @@ extends CharacterBody2D
 @onready var animated_sprite = $AnimatedSprite2D
 var new_direction: Vector2 = Vector2.ZERO
 var animation: String
-var is_attacking
-# Get the gravity from the project settings to be synced with RigidBody nodes.
+var is_attacking = false
+
+var is_sprinting = false
+var sprint_speed = 300
+
 
 
 
@@ -59,6 +62,11 @@ func _input(event):
 		is_attacking = true
 		animation = "attack_" + returnedDirection(new_direction)
 		animated_sprite.play(animation)
+		
+	if event.is_action_pressed("sprint"):
+		is_sprinting = true
+
+
 		
 
 
