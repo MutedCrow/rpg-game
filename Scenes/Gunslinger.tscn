@@ -600,7 +600,7 @@ shape = SubResource("CapsuleShape2D_mbihk")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_c4pyd")
-animation = &"walk_down"
+animation = &"idle_side"
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.23

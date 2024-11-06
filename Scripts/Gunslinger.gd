@@ -21,7 +21,7 @@ func _ready() -> void:
 
 
 func _physics_process(delta):
-	print(direction)
+	
 	var movement = speed * direction * delta
 	var collision = move_and_collide(movement)
 	
@@ -33,7 +33,7 @@ func _physics_process(delta):
 		
 	if !is_attacking:
 		pass
-		#enemyDirection(direction)
+		enemyDirection(direction)
 
 
 
@@ -57,13 +57,15 @@ func _on_timer_timeout():
 	
 	
 func enemyDirection(direction: Vector2):
+
 	if direction != Vector2.ZERO:
 		new_direction = direction
-		#animation = "walk_" + GSreturnedDirection(new_direction)
+		animation = "walk_" + GSreturnedDirection(new_direction)
 		animated_sprite.play(animation)
 	else:
-		#animation = "idle_" + GSreturnedDirection(direction)
+		animation = "idle_" + GSreturnedDirection(direction)
 		animated_sprite.play(animation)
+		
 
 
 
@@ -71,13 +73,17 @@ func GSreturnedDirection(direction: Vector2):
 	var normalized_direction = direction.normalized()
 	var default_return = "down"
 	
+	if abs(normalized_direction.x) > abs(normalized_direction.y):
+		if normalized_direction.x > 0:
+			animated_sprite.flip_h = false
+			return "side"
+		else: 
+			animated_sprite.flip_h = true
+			return "side"
 	if normalized_direction.y > 0:
 		return "down"
 	elif normalized_direction.y < 0:
 		return "up"
-	elif normalized_direction.x > 0:
-		animated_sprite.flip_h = false
-		return "side"
-	elif normalized_direction.x < 0 and normalized_direction.y == 0:
-		animated_sprite.flip_h = true
-		return "side"
+			
+			
+	return default_return
