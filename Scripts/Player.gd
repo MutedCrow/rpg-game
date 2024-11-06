@@ -8,11 +8,35 @@ var animation: String
 var is_attacking = false
 
 var is_sprinting = false
-var sprint_speed = 300
+var sprint_speed = 1000
+
+
+#ui variables
+var health = 100
+var regen_health = 1
+var max_health =  100
+var stamina = 100
+var max_stamina = 100
+var regen_stamina = 5
+
+#ui signals
+signal health_upd
+signal stamina_upd
 
 
 
-
+func _process(delta: float) -> void:
+	
+	var updated_health = min(health + regen_health + delta, max_health)
+	if updated_health != health: 
+		health = updated_health
+		health_upd.emit(health, max_health)
+	
+	
+	var updated_stamina = min(stamina + regen_stamina + delta, max_stamina)
+	if updated_stamina != stamina: 
+		stamina = updated_stamina
+		stamina_upd.emit(stamina, max_stamina)
 
 func _physics_process(delta):
 	
@@ -63,8 +87,16 @@ func _input(event):
 		animation = "attack_" + returnedDirection(new_direction)
 		animated_sprite.play(animation)
 		
-	if event.is_action_pressed("sprint"):
-		is_sprinting = true
+	if Input.is_action_pressed("sprint"):
+		if stamina > 0:
+			speed = 5
+			animated_sprite.speed_scale = 2
+			stamina = stamina - 5
+			stamina_upd.emit(stamina, max_stamina)
+			print(stamina)
+			
+		elif Input.is_action_just_released("sprint"):
+			speed == 200
 
 
 		
