@@ -1,14 +1,15 @@
 extends CharacterBody2D
 
 
-@export var speed = 200
+@export var speed = 150
+@export var stamina_drain = 10
 @onready var animated_sprite = $AnimatedSprite2D
 var new_direction: Vector2 = Vector2.ZERO
 var animation: String
 var is_attacking = false
 
 var is_sprinting = false
-var sprint_speed = 1000
+var sprint_speed = 300
 
 
 #ui variables
@@ -27,13 +28,13 @@ signal stamina_upd
 
 func _process(delta: float) -> void:
 	
-	var updated_health = min(health + regen_health + delta, max_health)
+	var updated_health = min(health + regen_health * delta, max_health)
 	if updated_health != health: 
 		health = updated_health
 		health_upd.emit(health, max_health)
 	
 	
-	var updated_stamina = min(stamina + regen_stamina + delta, max_stamina)
+	var updated_stamina = min(stamina + regen_stamina * delta, max_stamina)
 	if updated_stamina != stamina: 
 		stamina = updated_stamina
 		stamina_upd.emit(stamina, max_stamina)
@@ -89,14 +90,15 @@ func _input(event):
 		
 	if Input.is_action_pressed("sprint"):
 		if stamina > 0:
-			speed = 5
+			speed = sprint_speed
 			animated_sprite.speed_scale = 2
-			stamina = stamina - 5
+			stamina = stamina - stamina_drain
 			stamina_upd.emit(stamina, max_stamina)
 			print(stamina)
 			
-		elif Input.is_action_just_released("sprint"):
-			speed == 200
+	elif Input.is_action_just_released("sprint"):
+		speed = 150
+		animated_sprite.speed_scale = 1
 
 
 		

@@ -1,10 +1,14 @@
-[gd_scene load_steps=10 format=3 uid="uid://br36xgwvkjnnd"]
+[gd_scene load_steps=14 format=3 uid="uid://br36xgwvkjnnd"]
 
 [ext_resource type="Texture2D" uid="uid://ckx6cfsnq6t2b" path="res://Assets/Atlas.png" id="1_nxqga"]
+[ext_resource type="Script" path="res://Scripts/main.gd" id="1_q8f6j"]
 [ext_resource type="PackedScene" uid="uid://daq7eajpw3l2w" path="res://Scenes/player.tscn" id="1_ywlya"]
 [ext_resource type="Texture2D" uid="uid://fqukk3j6s0xu" path="res://Assets/Interior.png" id="2_8i1um"]
 [ext_resource type="Texture2D" uid="uid://fgjxr4il205f" path="res://Assets/Water.png" id="3_pjq0n"]
 [ext_resource type="PackedScene" uid="uid://wlm6qoodfdg0" path="res://Scenes/Gunslinger.tscn" id="5_gvend"]
+[ext_resource type="Texture2D" uid="uid://ub4knayjt1x7" path="res://Assets/Icons/bulletUP.png" id="7_e0nhb"]
+[ext_resource type="FontFile" uid="uid://d3n5sd8aawen4" path="res://Assets/Font/LaTequila.ttf" id="8_nm1gj"]
+[ext_resource type="Texture2D" uid="uid://bmlyinn8v0ssg" path="res://Assets/Icons/potion_01a.png" id="9_4ddgk"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_obdvs"]
 texture = ExtResource("1_nxqga")
@@ -5973,6 +5977,7 @@ sources/2 = SubResource("TileSetAtlasSource_uawdw")
 [node name="Main" type="Node2D"]
 y_sort_enabled = true
 position = Vector2(256, 136)
+script = ExtResource("1_q8f6j")
 
 [node name="TileMap" type="TileMap" parent="."]
 y_sort_enabled = true
@@ -6025,7 +6030,7 @@ offset_bottom = 3.0
 color = Color(0, 0.486275, 0.556863, 0.572549)
 metadata/_edit_use_anchors_ = true
 
-[node name="THP2" type="ColorRect" parent="UI"]
+[node name="THP" type="ColorRect" parent="UI"]
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -6039,7 +6044,7 @@ grow_horizontal = 2
 grow_vertical = 0
 color = Color(0, 0, 0, 0.133333)
 
-[node name="HP" type="ColorRect" parent="UI/THP2"]
+[node name="HP" type="ColorRect" parent="UI/THP"]
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 0.0384615
@@ -6051,3 +6056,60 @@ offset_right = 98.0
 offset_bottom = 9.0
 color = Color(1, 0.054902, 0, 0.509804)
 metadata/_edit_use_anchors_ = true
+
+[node name="Ammo" type="HBoxContainer" parent="UI"]
+offset_left = 1116.0
+offset_top = 613.0
+offset_right = 1145.0
+offset_bottom = 653.0
+size_flags_horizontal = 8
+
+[node name="Ammo Icon" type="Sprite2D" parent="UI/Ammo"]
+position = Vector2(15, -13)
+scale = Vector2(2.89844, 1.96875)
+skew = 0.0401425
+texture = ExtResource("7_e0nhb")
+
+[node name="Ammo #" type="Label" parent="UI/Ammo"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_type_variation = &"HeaderMedium"
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("8_nm1gj")
+theme_override_font_sizes/font_size = 12
+text = "10"
+horizontal_alignment = 1
+vertical_alignment = 1
+visible_characters = -2
+visible_ratio = -1.0
+
+[node name="Potion" type="HBoxContainer" parent="UI"]
+offset_left = 1079.0
+offset_top = 613.0
+offset_right = 1108.0
+offset_bottom = 653.0
+size_flags_horizontal = 8
+
+[node name="Potion Icon" type="Sprite2D" parent="UI/Potion"]
+position = Vector2(15, -11)
+scale = Vector2(2.59115, 2.00189)
+skew = 0.0401425
+texture = ExtResource("9_4ddgk")
+
+[node name="potion #" type="Label" parent="UI/Potion"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_type_variation = &"HeaderMedium"
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("8_nm1gj")
+theme_override_font_sizes/font_size = 12
+text = "10"
+horizontal_alignment = 1
+vertical_alignment = 1
+visible_characters = -2
+visible_ratio = -1.0
+
+[connection signal="health_upd" from="Player" to="." method="_on_player_health_upd"]
+[connection signal="stamina_upd" from="Player" to="." method="_on_player_stamina_upd"]
