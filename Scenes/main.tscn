@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://br36xgwvkjnnd"]
+[gd_scene load_steps=19 format=3 uid="uid://br36xgwvkjnnd"]
 
 [ext_resource type="Texture2D" uid="uid://ckx6cfsnq6t2b" path="res://Assets/Atlas.png" id="1_nxqga"]
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_q8f6j"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://ub4knayjt1x7" path="res://Assets/Icons/bulletUP.png" id="7_e0nhb"]
 [ext_resource type="FontFile" uid="uid://d3n5sd8aawen4" path="res://Assets/Font/LaTequila.ttf" id="8_nm1gj"]
 [ext_resource type="Texture2D" uid="uid://bmlyinn8v0ssg" path="res://Assets/Icons/potion_01a.png" id="9_4ddgk"]
+[ext_resource type="Texture2D" uid="uid://beltwhfoshjp" path="res://Assets/Icons/potion_03b.png" id="10_ey8ay"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_obdvs"]
 texture = ExtResource("1_nxqga")
@@ -5974,6 +5975,37 @@ sources/0 = SubResource("TileSetAtlasSource_obdvs")
 sources/1 = SubResource("TileSetAtlasSource_qc408")
 sources/2 = SubResource("TileSetAtlasSource_uawdw")
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xvt3k"]
+bg_color = Color(0.713726, 0.576471, 0.376471, 0.721569)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.575149, 0.398085, 0.182837, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xcivs"]
+bg_color = Color(0.936648, 0.418016, 0.307819, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.773733, 0.270291, 0.160478, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jaalh"]
+bg_color = Color(0.940269, 0.984527, 0.984864, 0.384314)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_21mac"]
+bg_color = Color(0.388235, 0.733333, 0.72549, 0.890196)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.331363, 0.660938, 0.653786, 0.890196)
+
 [node name="Main" type="Node2D"]
 y_sort_enabled = true
 position = Vector2(256, 136)
@@ -6003,109 +6035,128 @@ position = Vector2(121, 379)
 
 [node name="UI" type="CanvasLayer" parent="."]
 
-[node name="TStam" type="ColorRect" parent="UI"]
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
+[node name="MarginContainer" type="MarginContainer" parent="UI"]
+anchors_preset = 15
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -110.0
-offset_top = -39.0
-offset_right = 109.0
-offset_bottom = -29.0
 grow_horizontal = 2
-grow_vertical = 0
-color = Color(1, 1, 1, 0.498039)
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
 
-[node name="Stam" type="ColorRect" parent="UI/TStam"]
+[node name="Bars" type="VBoxContainer" parent="UI/MarginContainer"]
+custom_minimum_size = Vector2(300, 20)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+size_flags_stretch_ratio = 0.0
+theme_override_constants/separation = 3
+
+[node name="ProgressBarHP" type="ProgressBar" parent="UI/MarginContainer/Bars"]
+custom_minimum_size = Vector2(200, 20)
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_xvt3k")
+theme_override_styles/fill = SubResource("StyleBoxFlat_xcivs")
+value = 100.0
+show_percentage = false
+
+[node name="ProgressBarStam" type="ProgressBar" parent="UI/MarginContainer/Bars"]
+custom_minimum_size = Vector2(170, 10)
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_jaalh")
+theme_override_styles/fill = SubResource("StyleBoxFlat_21mac")
+value = 100.0
+show_percentage = false
+
+[node name="Panel" type="Panel" parent="UI/MarginContainer"]
+clip_contents = true
+custom_minimum_size = Vector2(238, 50)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="Icons" type="HBoxContainer" parent="UI/MarginContainer/Panel"]
+custom_minimum_size = Vector2(0, 30)
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.00913242
-anchor_right = 0.56621
-anchor_bottom = 0.6
-offset_left = 2.0
-offset_top = 1.0
-offset_right = 92.0
-offset_bottom = 3.0
-color = Color(0, 0.486275, 0.556863, 0.572549)
-metadata/_edit_use_anchors_ = true
+offset_left = 3.0
+offset_top = 3.0
+offset_right = 246.0
+offset_bottom = 47.0
 
-[node name="THP" type="ColorRect" parent="UI"]
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -146.0
-offset_top = -28.0
-offset_right = 146.0
-offset_bottom = -2.0
-grow_horizontal = 2
-grow_vertical = 0
-color = Color(0, 0, 0, 0.133333)
-
-[node name="HP" type="ColorRect" parent="UI/THP"]
-layout_mode = 1
-anchors_preset = -1
-anchor_top = 0.0384615
-anchor_right = 0.65411
-anchor_bottom = 0.576923
-offset_left = 2.0
-offset_top = 1.0
-offset_right = 98.0
-offset_bottom = 9.0
-color = Color(1, 0.054902, 0, 0.509804)
-metadata/_edit_use_anchors_ = true
-
-[node name="Ammo" type="HBoxContainer" parent="UI"]
-offset_left = 1116.0
-offset_top = 613.0
-offset_right = 1145.0
-offset_bottom = 653.0
+[node name="Ammo" type="HBoxContainer" parent="UI/MarginContainer/Panel/Icons"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
 size_flags_horizontal = 8
+theme_override_constants/separation = 0
 
-[node name="Ammo Icon" type="Sprite2D" parent="UI/Ammo"]
-position = Vector2(15, -13)
-scale = Vector2(2.89844, 1.96875)
-skew = 0.0401425
+[node name="TextureRect" type="TextureRect" parent="UI/MarginContainer/Panel/Icons/Ammo"]
+custom_minimum_size = Vector2(22, 15)
+layout_mode = 2
 texture = ExtResource("7_e0nhb")
+expand_mode = 1
+stretch_mode = 5
 
-[node name="Ammo #" type="Label" parent="UI/Ammo"]
+[node name="Ammo #" type="Label" parent="UI/MarginContainer/Panel/Icons/Ammo"]
 layout_mode = 2
 size_flags_horizontal = 8
 theme_type_variation = &"HeaderMedium"
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("8_nm1gj")
-theme_override_font_sizes/font_size = 12
-text = "10"
+theme_override_font_sizes/font_size = 18
+text = "00"
 horizontal_alignment = 1
 vertical_alignment = 1
 visible_characters = -2
 visible_ratio = -1.0
 
-[node name="Potion" type="HBoxContainer" parent="UI"]
-offset_left = 1079.0
-offset_top = 613.0
-offset_right = 1108.0
-offset_bottom = 653.0
+[node name="HPPotion" type="HBoxContainer" parent="UI/MarginContainer/Panel/Icons"]
+layout_mode = 2
 size_flags_horizontal = 8
+theme_override_constants/separation = 0
 
-[node name="Potion Icon" type="Sprite2D" parent="UI/Potion"]
-position = Vector2(15, -11)
-scale = Vector2(2.59115, 2.00189)
-skew = 0.0401425
+[node name="TextureRect" type="TextureRect" parent="UI/MarginContainer/Panel/Icons/HPPotion"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
 texture = ExtResource("9_4ddgk")
+stretch_mode = 5
 
-[node name="potion #" type="Label" parent="UI/Potion"]
+[node name="potion #" type="Label" parent="UI/MarginContainer/Panel/Icons/HPPotion"]
 layout_mode = 2
 size_flags_horizontal = 8
 theme_type_variation = &"HeaderMedium"
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("8_nm1gj")
-theme_override_font_sizes/font_size = 12
-text = "10"
+theme_override_font_sizes/font_size = 18
+text = "00"
+horizontal_alignment = 1
+vertical_alignment = 1
+visible_characters = -2
+visible_ratio = -1.0
+
+[node name="StamPotion" type="HBoxContainer" parent="UI/MarginContainer/Panel/Icons"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_constants/separation = 0
+
+[node name="TextureRect" type="TextureRect" parent="UI/MarginContainer/Panel/Icons/StamPotion"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+texture = ExtResource("10_ey8ay")
+stretch_mode = 5
+
+[node name="potion2 #" type="Label" parent="UI/MarginContainer/Panel/Icons/StamPotion"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_type_variation = &"HeaderMedium"
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("8_nm1gj")
+theme_override_font_sizes/font_size = 18
+text = "00"
 horizontal_alignment = 1
 vertical_alignment = 1
 visible_characters = -2

@@ -15,10 +15,10 @@ func _ready():
 func _process(delta):
 	pass
 
-func _on_player_health_upd():
-	health_bar_value.size.x = 98 * player.HP / player.THP
+#func _on_player_health_upd(health, max_health):
+	#health_bar_value.size.x = 287 * player.HP / player.THP
 	#287
-func _on_player_stamina_upd():
-	print("gjfdlighdffghdfkghdfkjgdffg")
-	print("changing bar", player.stamina)
-	stamina_bar_value.size.x = 212 * player.Stam / player.TStam
+#func _on_player_stamina_upd(stamina, max_stamina):
+	#print("gjfdlighdffghdfkghdfkjgdffg")
+	#print("changing bar", player.stamina)
+	#stamina_bar_value.size.x = 212 * player.Stam / player.TStam
