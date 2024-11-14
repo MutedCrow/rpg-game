@@ -1,7 +1,7 @@
 extends Node2D
 
-@onready var health_bar_value = $UI/THP/HP
-@onready var stamina_bar_value = $UI/TStam/Stam
+@onready var health_bar_value = $%ProgressBarHP
+@onready var stamina_bar_value = $%ProgressBarStam
 @onready var player = $Player
 
 
@@ -15,10 +15,9 @@ func _ready():
 func _process(delta):
 	pass
 
-#func _on_player_health_upd(health, max_health):
-	#health_bar_value.size.x = 287 * player.HP / player.THP
-	#287
-#func _on_player_stamina_upd(stamina, max_stamina):
-	#print("gjfdlighdffghdfkghdfkjgdffg")
-	#print("changing bar", player.stamina)
-	#stamina_bar_value.size.x = 212 * player.Stam / player.TStam
+func _on_player_health_upd(health, max_health):
+	health_bar_value.value = 100 * health / max_health
+	
+func _on_player_stamina_upd(stamina, max_stamina):
+	print("changing bar", player.stamina)
+	stamina_bar_value.value = 100 * stamina / max_stamina
