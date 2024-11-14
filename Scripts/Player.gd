@@ -39,6 +39,7 @@ func _process(delta: float) -> void:
 		stamina = updated_stamina
 		stamina_upd.emit(stamina, max_stamina)
 
+
 func _physics_process(delta):
 	
 	var direction: Vector2 = Vector2.ZERO
@@ -95,7 +96,6 @@ func _input(event):
 			stamina = stamina - stamina_drain
 			stamina_upd.emit(stamina, max_stamina)
 			print(stamina)
-			
 	elif Input.is_action_just_released("sprint"):
 		speed = 150
 		animated_sprite.speed_scale = 1

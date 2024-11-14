@@ -6162,5 +6162,36 @@ vertical_alignment = 1
 visible_characters = -2
 visible_ratio = -1.0
 
+[node name="Panel2" type="Panel" parent="UI/MarginContainer"]
+custom_minimum_size = Vector2(150, 50)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/MarginContainer/Panel2"]
+layout_mode = 2
+offset_right = 1.0
+offset_bottom = 23.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/MarginContainer/Panel2/VBoxContainer"]
+custom_minimum_size = Vector2(150, 50)
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="UI/MarginContainer/Panel2/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("8_nm1gj")
+theme_override_font_sizes/font_size = 18
+text = "  XP:"
+vertical_alignment = 1
+
+[node name="Label" type="Label" parent="UI/MarginContainer/Panel2/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("8_nm1gj")
+theme_override_font_sizes/font_size = 18
+text = "00
+"
+horizontal_alignment = 2
+vertical_alignment = 1
+
 [connection signal="health_upd" from="Player" to="." method="_on_player_health_upd"]
 [connection signal="stamina_upd" from="Player" to="." method="_on_player_stamina_upd"]
