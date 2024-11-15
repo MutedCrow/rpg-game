@@ -95,7 +95,6 @@ func _input(event):
 			animated_sprite.speed_scale = 2
 			stamina = stamina - stamina_drain
 			stamina_upd.emit(stamina, max_stamina)
-			print(stamina)
 		if stamina < 0:
 			speed = 150
 			animated_sprite.speed_scale = 1

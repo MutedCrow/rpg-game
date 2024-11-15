@@ -6006,7 +6006,7 @@ border_width_right = 1
 border_width_bottom = 1
 border_color = Color(0.331363, 0.660938, 0.653786, 0.890196)
 
-[node name="Main" type="Node2D"]
+[node name="main" type="Node2D"]
 y_sort_enabled = true
 position = Vector2(256, 136)
 script = ExtResource("1_q8f6j")

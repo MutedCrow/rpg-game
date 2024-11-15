@@ -19,5 +19,5 @@ func _on_player_health_upd(health, max_health):
 	health_bar_value.value = 100 * health / max_health
 	
 func _on_player_stamina_upd(stamina, max_stamina):
-	print("changing bar", player.stamina)
+	print("stam change :", player.stamina)
 	stamina_bar_value.value = 100 * stamina / max_stamina
