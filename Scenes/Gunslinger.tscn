@@ -603,7 +603,7 @@ sprite_frames = SubResource("SpriteFrames_c4pyd")
 animation = &"idle_side"
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 0.23
+wait_time = 0.181
 autostart = true
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

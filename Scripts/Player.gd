@@ -10,6 +10,7 @@ var is_attacking = false
 
 var is_sprinting = false
 var sprint_speed = 300
+var ammo_amount = 6
 
 
 #ui variables
@@ -23,7 +24,15 @@ var regen_stamina = 15
 #ui signals
 signal health_upd
 signal stamina_upd
+signal ammo_amount_upd
 
+#bullet
+
+@onready var bullet_scene = preload("res://Scenes/Bullet.tscn")
+var bullet_damage = 30
+var damage = 30
+var bullet_reload_time = 5
+var bullet_fired_time = 0.5
 
 
 func _process(delta: float) -> void:
@@ -85,10 +94,15 @@ func returnedDirection(direction: Vector2):
 
 func _input(event):
 	if event.is_action_pressed("shoot"):
-		is_attacking = true
-		animation = "attack_" + returnedDirection(new_direction)
-		animated_sprite.play(animation)
-		
+		var now = Time.get_ticks_msec()
+		if now >= bullet_fired_time and ammo_amount > 0:
+			is_attacking = true
+			animation = "attack_" + returnedDirection(new_direction)
+			animated_sprite.play(animation)
+			bullet_fired_time = now + bullet_reload_time
+			ammo_amount = ammo_amount - 1
+			ammo_amount_upd.emit(ammo_amount)
+			
 	if Input.is_action_pressed("sprint"):
 		if stamina > 0:
 			speed = sprint_speed
@@ -110,5 +124,12 @@ func _input(event):
 
 
 func _on_animated_sprite_2d_animation_finished():
-	print("finish attacking")
+	#print("finish attacking")
 	is_attacking = false
+	if animated_sprite.animation.begins_with("attack_"):
+		var bullet = bullet_scene.instantiate()
+		bullet.damage = bullet_damage
+		bullet.direction = new_direction.normalized()
+		bullet.position = position * new_direction.normalized() * 4
+		get_tree().root.get_node("main").add_child(bullet)
+	
