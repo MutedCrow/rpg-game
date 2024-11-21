@@ -26,13 +26,15 @@ func _process(delta):
 
 func _on_body_entered(body):
 	print()
-	if body.name == "player":
+	if body.name == "Player":
 		return
 	if body.name == "TileMap":
-		if tilemap.get_layer_name("+1"):
-			return
-		if tilemap.get_layer_name("-1"):
-			return
+		if body.get_layer_name(0):
+			print("building hit")
+			pass
+		if body.get_layer_name(2):
+			print("water hit")
+			pass
 	if body.is_in_group("enemies"):
 		pass
 		

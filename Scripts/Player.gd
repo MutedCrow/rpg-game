@@ -98,6 +98,7 @@ func _input(event):
 		if now >= bullet_fired_time and ammo_amount > 0:
 			is_attacking = true
 			animation = "attack_" + returnedDirection(new_direction)
+			print("balls")
 			animated_sprite.play(animation)
 			bullet_fired_time = now + bullet_reload_time
 			ammo_amount = ammo_amount - 1
@@ -124,12 +125,12 @@ func _input(event):
 
 
 func _on_animated_sprite_2d_animation_finished():
-	#print("finish attacking")
+	print("finish attacking")
 	is_attacking = false
 	if animated_sprite.animation.begins_with("attack_"):
 		var bullet = bullet_scene.instantiate()
 		bullet.damage = bullet_damage
 		bullet.direction = new_direction.normalized()
-		bullet.position = position * new_direction.normalized() * 4
+		bullet.position = position + new_direction.normalized() * 8 
 		get_tree().root.get_node("main").add_child(bullet)
 	
