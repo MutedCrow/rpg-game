@@ -5,7 +5,7 @@ extends Area2D
 
 @onready var tilemap = get_tree().root.get_node("main/TileMap")
 var direction : Vector2
-var speed = 80
+var speed = 280
 var damage = 30
 
 @onready var animated_sprite = $AnimatedSprite2D
@@ -49,6 +49,7 @@ func _on_body_entered(body):
 func _on_animated_sprite_2d_animation_finished():
 	if animated_sprite.animation == "Flash":
 		get_tree().queue_delete(self)
+		queue_free()
 		
 
 

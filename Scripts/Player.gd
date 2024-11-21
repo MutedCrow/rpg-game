@@ -10,7 +10,7 @@ var is_attacking = false
 
 var is_sprinting = false
 var sprint_speed = 300
-var ammo_amount = 6
+var ammo_amount = 1000
 
 
 #ui variables
@@ -94,6 +94,7 @@ func returnedDirection(direction: Vector2):
 
 func _input(event):
 	if event.is_action_pressed("shoot"):
+		animated_sprite.speed_scale = 1
 		var now = Time.get_ticks_msec()
 		if now >= bullet_fired_time and ammo_amount > 0:
 			is_attacking = true
@@ -131,6 +132,6 @@ func _on_animated_sprite_2d_animation_finished():
 		var bullet = bullet_scene.instantiate()
 		bullet.damage = bullet_damage
 		bullet.direction = new_direction.normalized()
-		bullet.position = position + new_direction.normalized() * 8 
+		bullet.position = position + new_direction.normalized() * 4
 		get_tree().root.get_node("main").add_child(bullet)
 	
