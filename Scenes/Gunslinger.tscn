@@ -1,4 +1,4 @@
-[gd_scene load_steps=82 format=3 uid="uid://wlm6qoodfdg0"]
+[gd_scene load_steps=84 format=3 uid="uid://wlm6qoodfdg0"]
 
 [ext_resource type="Script" path="res://Scripts/Gunslinger.gd" id="1_csti1"]
 [ext_resource type="Texture2D" uid="uid://cy3gp0r2jdlxp" path="res://Assets/Mobs/Cactus/Cactus Front Sheet.png" id="2_s35rj"]
@@ -591,6 +591,27 @@ animations = [{
 "speed": 10.0
 }]
 
+[sub_resource type="Animation" id="Animation_ipqea"]
+resource_name = "1"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 1,
+"values": []
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qxnos"]
+_data = {
+"1": SubResource("Animation_ipqea")
+}
+
 [node name="Gunslinger" type="CharacterBody2D" groups=["enemies"]]
 script = ExtResource("1_csti1")
 
@@ -600,11 +621,16 @@ shape = SubResource("CapsuleShape2D_mbihk")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_c4pyd")
-animation = &"idle_side"
+animation = &"hit"
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.181
 autostart = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_qxnos")
+}
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

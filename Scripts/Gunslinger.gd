@@ -5,6 +5,16 @@ extends CharacterBody2D
 var direction: Vector2 = Vector2.ZERO
 var new_direction = Vector2(0, 1)
 
+var health = 100
+var regen_health = 1
+var max_health =  100
+
+@onready var bullet_scene = preload("res://Scenes/Bullet.tscn")
+var bullet_damage = 30
+var damage = 30
+var bullet_reload_time = 5
+var bullet_fired_time = 0.5
+
 var rng = RandomNumberGenerator.new()
 
 var timer = 0
@@ -15,6 +25,13 @@ var animation
 var is_attacking = false
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
+
+func _process(delta: float) -> void:
+	
+	var updated_health = clamp(health + regen_health * delta,0, max_health)
+	if updated_health != health: 
+		health = updated_health
+
 
 func _ready() -> void:
 	rng.randomize()
@@ -87,3 +104,15 @@ func GSreturnedDirection(direction: Vector2):
 			
 			
 	return default_return
+	
+	
+	
+	
+
+
+func hit(damage):
+	health -= damage
+	if health > 0:
+		pass
+	else:
+		pass
