@@ -118,6 +118,9 @@ func hit(damage):
 	if health > 0:
 		animated_sprite.play("hit")
 		animation_player.play("1")
+		is_attacking = false
+		await get_tree().create_timer(2).timeout
+		
 	else:
 		timer_node.stop()
 		set_process(false)
@@ -137,3 +140,7 @@ func _on_animated_sprite_2d_animation_finished():
 	if animated_sprite.animation == "death":
 		get_tree().queue_delete(self)
 	is_attacking = false
+
+
+func _on_animation_player_animation_finished(anim_name):
+	animated_sprite.modulate = Color(1, 1, 1, 1)

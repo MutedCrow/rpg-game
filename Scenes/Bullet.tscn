@@ -1,6 +1,6 @@
 [gd_scene load_steps=13 format=3 uid="uid://ba4lgmo5to8mb"]
 
-[ext_resource type="Script" path="res://Scenes/Bullet.gd" id="1_83wpe"]
+[ext_resource type="Script" path="res://Scripts/Bullet.gd" id="1_3dcmg"]
 [ext_resource type="Texture2D" uid="uid://c0x06v0gpmfeh" path="res://Assets/FX/Death Explosion.png" id="1_xmluo"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_q1ilc"]
@@ -72,7 +72,7 @@ size = Vector2(10, 17)
 
 [node name="Area2D" type="Area2D"]
 z_index = 5
-script = ExtResource("1_83wpe")
+script = ExtResource("1_3dcmg")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 z_index = 3
