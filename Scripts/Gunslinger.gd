@@ -21,8 +21,12 @@ var timer = 0
 
 @onready var player = $"../Player"
 var animation
+@onready var timer_node = $Timer
 @onready var animated_sprite = $AnimatedSprite2D
+@onready var animation_player = $AnimationPlayer
 var is_attacking = false
+
+signal death
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 
@@ -49,7 +53,6 @@ func _physics_process(delta):
 		timer = 0
 		
 	if !is_attacking:
-		pass
 		enemyDirection(direction)
 
 
@@ -113,6 +116,24 @@ func GSreturnedDirection(direction: Vector2):
 func hit(damage):
 	health -= damage
 	if health > 0:
-		pass
+		animated_sprite.play("hit")
+		animation_player.play("1")
 	else:
-		pass
+		timer_node.stop()
+		set_process(false)
+		is_attacking = true
+		direction = Vector2.ZERO
+		animated_sprite.play("death")
+		death.emit()
+		
+
+
+
+
+
+
+
+func _on_animated_sprite_2d_animation_finished():
+	if animated_sprite.animation == "death":
+		get_tree().queue_delete(self)
+	is_attacking = false

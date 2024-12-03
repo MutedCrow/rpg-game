@@ -36,7 +36,8 @@ func _on_body_entered(body):
 			print("water hit")
 			pass
 	if body.is_in_group("enemies"):
-		pass
+		body.hit(damage)
+		
 		
 		
 	direction = Vector2.ZERO
