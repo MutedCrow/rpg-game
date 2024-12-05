@@ -28,7 +28,7 @@ signal ammo_amount_upd
 
 #bullet
 
-@onready var bullet_scene = preload("res://Scenes/Bullet.tscn")
+#@onready var bullet_scene = preload("res://Scenes/Bullet.tscn")
 var bullet_damage = 30
 var damage = 30
 var bullet_reload_time = 5
@@ -129,7 +129,7 @@ func _on_animated_sprite_2d_animation_finished():
 	print("finish attacking")
 	is_attacking = false
 	if animated_sprite.animation.begins_with("attack_"):
-		var bullet = bullet_scene.instantiate()
+		var bullet = Global.bullet_scene.instantiate()
 		bullet.damage = bullet_damage
 		bullet.direction = new_direction.normalized()
 		bullet.position = position + new_direction.normalized() * 4

@@ -3,10 +3,6 @@
 [ext_resource type="Script" path="res://Scripts/Bullet.gd" id="1_3dcmg"]
 [ext_resource type="Texture2D" uid="uid://c0x06v0gpmfeh" path="res://Assets/FX/Death Explosion.png" id="1_xmluo"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_q1ilc"]
-atlas = ExtResource("1_xmluo")
-region = Rect2(0, 0, 50, 55)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_kkyls"]
 atlas = ExtResource("1_xmluo")
 region = Rect2(50, 0, 50, 55)
@@ -35,12 +31,13 @@ region = Rect2(300, 0, 50, 55)
 atlas = ExtResource("1_xmluo")
 region = Rect2(350, 0, 50, 55)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_q1ilc"]
+atlas = ExtResource("1_xmluo")
+region = Rect2(0, 0, 50, 55)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_x5tem"]
 animations = [{
 "frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_q1ilc")
-}, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_kkyls")
 }, {
@@ -61,6 +58,9 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_jfmi7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q1ilc")
 }],
 "loop": false,
 "name": &"Flash",
