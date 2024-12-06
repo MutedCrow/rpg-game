@@ -20,14 +20,28 @@ func _process(delta):
 
 
 func spawn_enemy():
-	var enemy = Global.Gunslinger_scene.instantiate()
-	Spawned_Enemies.add_child(enemy)
+	var attempts = 0
+	var max_attempts = 100
+	var spawned = false
+	
+	while not spawned and attempts < max_attempts:
+		var random_position = Vector2(rng.randi() % tilemap.get_used_rect().size.x, rng.randi() % tilemap.get_used_rect().size.y)
+		if is_valid_spawn_location(Global.ground, random_position):
+			var enemy = Global.Gunslinger_scene.instantiate()
+			enemy.position = tilemap.map_to_local(random_position) + Vector2(tilemap.tile_size.x, tilemap.tile_size.y)/2 
+			Spawned_Enemies.add_child(enemy)
+			spawned = true
+		else:
+			attempts += 1
+	if 
 	
 
 func is_valid_spawn_location(layer, position):
 	var cell_coords = Vector2(position.x, position.y)
-	if tilemap.get_cell_source_id(Global.below, cell_coords) != 1 || tilemap.get_cell_source_id(Global.ground, cell_coords) != 1 || tilemap.get_cell_source_id(Global.above, cell_coords) != 1:
+	if tilemap.get_cell_source_id(Global.below, cell_coords) != 1:
 		return false
-	if tilemap.get_cell_source_id(Global.below, cell_coords) != 1 || tilemap.get_cell_source_id(Global.ground, cell_coords) != 1 || tilemap.get_cell_source_id(Global.above, cell_coords) != 1:
+	if tilemap.get_cell_source_id(Global.ground, cell_coords) != 1:
 		return true
+	if tilemap.get_cell_source_id(Global.above, cell_coords) != 1:
+		return false
 	
