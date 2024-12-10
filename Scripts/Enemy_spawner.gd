@@ -1,7 +1,7 @@
 extends Node2D
 
 @onready var Spawned_Enemies = $SpawnedEnemies
-@onready var tilemap = get_tree().root.get_node("Main/TileMap")
+@onready var tilemap = $"../TileMap"
 
 @onready var max_enemies = 20
 var enemy_count = 0
@@ -33,8 +33,9 @@ func spawn_enemy():
 			spawned = true
 		else:
 			attempts += 1
-	if 
-	
+	if attempts >= max_attempts:
+		print("warning: couldnt find valid enemy spawn location")
+
 
 func is_valid_spawn_location(layer, position):
 	var cell_coords = Vector2(position.x, position.y)
@@ -45,3 +46,9 @@ func is_valid_spawn_location(layer, position):
 	if tilemap.get_cell_source_id(Global.above, cell_coords) != 1:
 		return false
 	
+
+
+func _on_timer_timeout():
+	if enemy_count < max_enemies:
+		spawn_enemy()
+		enemy_count += 1

@@ -1,8 +1,9 @@
-[gd_scene load_steps=19 format=3 uid="uid://br36xgwvkjnnd"]
+[gd_scene load_steps=20 format=3 uid="uid://br36xgwvkjnnd"]
 
 [ext_resource type="Texture2D" uid="uid://ckx6cfsnq6t2b" path="res://Assets/Atlas.png" id="1_nxqga"]
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_q8f6j"]
 [ext_resource type="PackedScene" uid="uid://daq7eajpw3l2w" path="res://Scenes/player.tscn" id="1_ywlya"]
+[ext_resource type="PackedScene" uid="uid://culswq5xc55x5" path="res://Scenes/enemy_spawner.tscn" id="2_1khy1"]
 [ext_resource type="Texture2D" uid="uid://fqukk3j6s0xu" path="res://Assets/Interior.png" id="2_8i1um"]
 [ext_resource type="Texture2D" uid="uid://fgjxr4il205f" path="res://Assets/Water.png" id="3_pjq0n"]
 [ext_resource type="PackedScene" uid="uid://wlm6qoodfdg0" path="res://Scenes/Gunslinger.tscn" id="5_gvend"]
@@ -6011,6 +6012,8 @@ y_sort_enabled = true
 position = Vector2(256, 136)
 script = ExtResource("1_q8f6j")
 
+[node name="Enemy_spawner" parent="." instance=ExtResource("2_1khy1")]
+
 [node name="TileMap" type="TileMap" parent="."]
 y_sort_enabled = true
 position = Vector2(1412, 1225)
@@ -6028,6 +6031,8 @@ layer_2/tile_data = PackedInt32Array()
 [node name="Player" parent="." instance=ExtResource("1_ywlya")]
 z_index = 2
 position = Vector2(279, 338)
+speed = null
+stamina_drain = null
 
 [node name="Gunslinger" parent="." instance=ExtResource("5_gvend")]
 z_index = 2
