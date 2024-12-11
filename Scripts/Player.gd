@@ -21,7 +21,7 @@ var stamina = 100
 var max_stamina = 100
 var regen_stamina = 15
 
-enum Pickups { AMMO, STAMINA, HEALTH }
+enum pickups { AMMO, STAMINA, HEALTH }
 var health_pickup_amount = 0
 var stamina_pickup_amount = 0
 
@@ -145,7 +145,7 @@ func _on_animated_sprite_2d_animation_finished():
 
 
 func add_pickup(Item):
-	if item == pickups.AMMO:
+	if Item == pickups.AMMO:
 		ammo_amount = ammo_amount + 3
 		ammo_amount_upd.emit(ammo_amount)
 	

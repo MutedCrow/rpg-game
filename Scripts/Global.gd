@@ -5,7 +5,7 @@ extends Node
 
 
 @onready var enemy_scene = preload("res://Scenes/Gunslinger.tscn")
-@onready var bullet = preload("res://Scripts/Bullet.gd")
+@onready var bullet_scene = preload("res://Scenes/Bullet.tscn")
 #@onready var pickups_scene = preload()
 
 
