@@ -27,11 +27,12 @@ func spawn_enemy():
 	while not spawned and attempts < max_attempts:
 		var random_position = Vector2(rng.randi() % tilemap.get_used_rect().size.x, rng.randi() % tilemap.get_used_rect().size.y)
 		if is_valid_spawn_location(Global.ground, random_position):
-			var enemy = Global.Gunslinger_scene.instantiate()
+			var enemy = Global.enemy_scene.instantiate()
+			print(enemy_count)
 			enemy.position = tilemap.map_to_local(random_position) + Vector2(tilemap.tile_set.tile_size.x, tilemap.tile_set.tile_size.y)/2 
 			Spawned_Enemies.add_child(enemy)
 			spawned = true
-			print("enemy_count")
+			
 		else:
 			attempts += 1
 	if attempts >= max_attempts:

@@ -422,10 +422,10 @@ animations = [{
 "speed": 12.0
 }, {
 "frames": [{
-"duration": 1.0,
+"duration": 6.0,
 "texture": SubResource("AtlasTexture_2gvjr")
 }],
-"loop": true,
+"loop": false,
 "name": &"death",
 "speed": 1.0
 }, {
@@ -621,8 +621,7 @@ shape = SubResource("CapsuleShape2D_mbihk")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_c4pyd")
-animation = &"hit"
-frame_progress = 1.0
+animation = &"death"
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.181

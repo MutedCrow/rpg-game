@@ -12,3 +12,4 @@ extends Node
 const below = 0
 const ground = 1
 const above = 2
+const spawns = 3

@@ -19,7 +19,8 @@ var rng = RandomNumberGenerator.new()
 
 var timer = 0
 
-@onready var player = $"../Player"
+#@onready var player = $"../Player"
+var player = get_tree().root.get_node("main/Player")
 var animation
 @onready var timer_node = $Timer
 @onready var animated_sprite = $AnimatedSprite2D
